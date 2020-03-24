@@ -7,15 +7,20 @@ Created on Tue Mar 24 11:42:14 2020
 """
 import time
 
+#
+# Statics that won't change for use in this project
+#
 actions = ['p', 'c']
 
 exchanges = {'Squires': ['Food', 'Meetings', 'Rooms'],
              'Goodwin': ['Classrooms', 'Auditorium'],
              'Library': ['Noise', 'Seating', 'Wishes']}
 
-
 team_number = '19'
 
+#
+# Parses command input and checks for errors, returns in mongo insert form
+#
 def parse_input(command):
     try:
         action = command.split(':')[0]
