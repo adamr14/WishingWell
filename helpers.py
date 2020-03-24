@@ -26,8 +26,7 @@ def parse_input(command):
         action = command.split(':')[0]
         exchange = command.split(':')[1].split('+')[0]
         queue = command.split(' ')[0].split('+')[1]
-        message = command.split(' ')[1]
-        print(message)
+        message = ' '.join(command.split(' ')[1:])
     except:
         raise Exception('Error: Invalid command Format. Command format should follow action:exchange+queue message')
     

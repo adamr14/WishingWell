@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 #import pymongo
 import helpers
-from pymongo import MongoClient
+import pymongo
 
 # Initialization
-client = MongoClient()
+db = pymongo.MongoClient().test
 
 
 while 1:
@@ -13,7 +13,9 @@ while 1:
         # Parse input (look in helpers.py)
         mongo_insert = helpers.parse_input(input("Please input your command:"))
         
+        print (mongo_insert)
         # insert to mongo database
+        db.utilization.insert(mongo_insert)
         
     except Exception as e:
        print(e)
