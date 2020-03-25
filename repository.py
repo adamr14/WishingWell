@@ -47,5 +47,10 @@ while 1:
         # insert to mongo database
         db.utilization.insert(mongo_insert)
         
+        # publish to RabbitMQ message queue
+        channel.basic_publish(exchange = mongo_insert['Place'],
+                              routing_key = mongo_insert['Subject'],
+                              body=mongo_insert['Message'])
+        
     except Exception as e:
        print(e)
