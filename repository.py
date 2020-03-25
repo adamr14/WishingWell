@@ -22,7 +22,6 @@ channel = connection.channel()
 # Consume Callback
 def callback(ch, method, properties, body):
     print("%r:%r" % (method.routing_key, body))
-    print("got here")
     channel.stop_consuming()
     
 
@@ -39,16 +38,23 @@ while 1:
         
         # Do action
         if mongo_insert['Action'] == 'p':
-            # product RabbitMQ message
+            # produce RabbitMQ message
             channel.basic_publish(exchange = mongo_insert['Place'],
                                   routing_key = mongo_insert['Subject'],
                                   body=mongo_insert['Message'])
+            helpers.print_checkpoint(3, 'Sent produce type message to rabbitMQ - Queue', mongo_insert['Message'])
         elif mongo_insert['Action'] == 'c':
             # consume RabitMQ message
             channel.basic_consume(callback,
                                   queue=mongo_insert['Subject'],
                                   no_ack=True)
-            channel.start_consuming()
+            helpers.print_checkpoint(3, 'Output from queue consumption via callback: ', '')
+            name, count, consumers = channel.queue_declare(queue=mongo_insert['Subject'],
+                                                           passive=True)
+            while count > 0:
+                channel.start_consuming()
+                name, count, consumers = channel.queue_declare(queue=mongo_insert['Subject'],
+                                                               passive=True)
             
     except Exception as e:
        print(e)
