@@ -52,7 +52,5 @@ while 1:
                 channel.start_consuming()
             except KeyboardInterrupt:
                 channel.stop_consuming()
-    except KeyboardInterrupt:
-            print('Goodbye!')
     except Exception as e:
         print(e)
