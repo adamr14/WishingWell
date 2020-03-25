@@ -38,6 +38,27 @@ channel.queue_declare(queue='Wishes')
 channel.queue_bind(exchange='Squires',
                    queue='Food',
                    routing_key='Food')
+channel.queue_bind(exchange='Squires',
+                   queue='Meetings',
+                   routing_key='Meetings')
+channel.queue_bind(exchange='Squires',
+                   queue='Rooms',
+                   routing_key='Rooms')
+channel.queue_bind(exchange='Goodwin',
+                   queue='Classrooms',
+                   routing_key='Classrooms')
+channel.queue_bind(exchange='Goodwin',
+                   queue='Auditorium',
+                   routing_key='Auditorium')
+channel.queue_bind(exchange='Library',
+                   queue='Noise',
+                   routing_key='Noise')
+channel.queue_bind(exchange='Library',
+                   queue='Seating',
+                   routing_key='Seating')
+channel.queue_bind(exchange='Library',
+                   queue='Wishes',
+                   routing_key='Wishes')
 
 
 
