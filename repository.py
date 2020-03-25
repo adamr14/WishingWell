@@ -21,11 +21,11 @@ channel = connection.channel()
 
 # Exchanges
 channel.exchange_declare(exchange='Squires',
-                         direct=True)
+                         type='direct')
 channel.exchange_declare(exchange='Goodwin',
-                         direct=True)
+                         type='direct')
 channel.exchange_declare(exchange='Library',
-                         direct=True)
+                         type='direct')
 
 # Message Queues
 channel.queue_declare(queue='Food')
