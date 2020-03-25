@@ -22,7 +22,6 @@ channel = connection.channel()
 # Consume Callback
 def callback(ch, method, properties, body):
     print("%r:%r" % (method.routing_key, body))
-    channel.stop_consuming()
     
 
 while 1:
@@ -42,13 +41,13 @@ while 1:
         channel.basic_publish(exchange = mongo_insert['Place'],
                               routing_key = mongo_insert['Subject'],
                               body=mongo_insert['Message'])
-        helpers.print_checkpoint(3, 'Sent produce type message to rabbitMQ - Queue', mongo_insert['Message'])
+        helpers.print_checkpoint(3, 'Sent produce type message to rabbitMQ - Queue', mongo_insert['Subject'])
     elif mongo_insert['Action'] == 'c':
         # consume RabitMQ message
         channel.basic_consume(callback,
                               queue=mongo_insert['Subject'],
                               no_ack=True)
-        helpers.print_checkpoint(3, 'Output from queue consumption via callback: ', '')
+        helpers.print_checkpoint(3, 'Output from queue consumption via callback', '')
         try:
             channel.start_consuming()
         except KeyboardInterrupt:
