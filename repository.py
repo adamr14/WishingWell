@@ -22,6 +22,7 @@ channel = connection.channel()
 # Consume Callback
 def callback(ch, method, properties, body):
     print("%r:%r" % (method.routing_key, body))
+    channel.stop_consuming()
     
 
 while 1:
@@ -47,5 +48,6 @@ while 1:
                                   queue=mongo_insert['Subject'],
                                   no_ack=True)
             channel.start_consuming()
+            
     except Exception as e:
        print(e)
