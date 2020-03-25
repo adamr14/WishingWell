@@ -36,15 +36,16 @@ while 1:
         db.utilization.insert(mongo_insert)
         
         # Do action
-        channel.basic_publish(exchange = mongo_insert['Place'],
-                              routing_key = mongo_insert['Subject'],
-                              body=mongo_insert['Message'])
-        
-        if mongo_insert['Action'] == 'c':
+        if mongo_insert['Action'] == 'p':
+            # product RabbitMQ message
+            channel.basic_publish(exchange = mongo_insert['Place'],
+                                  routing_key = mongo_insert['Subject'],
+                                  body=mongo_insert['Message'])
+        elif mongo_insert['Action'] == 'c':
             # consume RabitMQ message
             channel.basic_consume(callback,
                                   queue=mongo_insert['Subject'],
                                   no_ack=True)
-        
+            #channel.start_consuming()
     except Exception as e:
        print(e)
