@@ -18,6 +18,15 @@ exchanges = {'Squires': ['Food', 'Meetings', 'Rooms'],
 
 team_number = '19'
 
+def print_checkpoint(num, des, data):
+    output = []
+    output.append('[Checkpoint 0' + str(num))
+    output.append(str(time.time()) + ']')
+    output.append(des)
+    output.append(str(data))
+    print (' '.join(output))
+    return
+
 #
 # Parses command input and checks for errors, returns in mongo insert form
 #
@@ -27,6 +36,9 @@ def parse_input(command):
         exchange = command.split(':')[1].split('+')[0]
         queue = command.split(' ')[0].split('+')[1]
         message = ' '.join(command.split(' ')[1:])
+        
+        # Print checkpoint 1
+        print_checkpoint(1, 'Message Captured', message)
     except:
         raise Exception('Error: Invalid command Format. Command format should follow action:exchange+queue message')
     
