@@ -20,12 +20,9 @@ connection = pika.BlockingConnection(pika.ConnectionParameters(
 channel = connection.channel()
 
 # Exchanges
-channel.exchange_declare(exchange='Squires',
-                         type='direct')
-channel.exchange_declare(exchange='Goodwin',
-                         type='direct')
-channel.exchange_declare(exchange='Library',
-                         type='direct')
+channel.exchange_declare(exchange='Squires')
+channel.exchange_declare(exchange='Goodwin')
+channel.exchange_declare(exchange='Library')
 
 # Message Queues
 channel.queue_declare(queue='Food')
