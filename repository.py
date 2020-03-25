@@ -19,8 +19,10 @@ connection = pika.BlockingConnection(pika.ConnectionParameters(
     host='localhost'))
 channel = connection.channel()
 
-
-
+# Consume Callback
+def callback(ch, method, properties, body):
+    print("%r:%r" % (method.routing_key, body))
+    
 
 while 1:
     try:
@@ -33,10 +35,17 @@ while 1:
         # insert to mongo database
         db.utilization.insert(mongo_insert)
         
-        # publish to RabbitMQ message queue
+        # Do action
         channel.basic_publish(exchange = mongo_insert['Place'],
                               routing_key = mongo_insert['Subject'],
                               body=mongo_insert['Message'])
+        
+        if mongo_insert['Action'] == 'c':
+            # consume RabitMQ message
+            channel.basic_consume(callback,
+                                  queue=mongo_insert['Subject'],
+                                  no_ack=True)
+            channel.start_consuming()
         
     except Exception as e:
        print(e)
