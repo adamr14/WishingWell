@@ -22,6 +22,7 @@ channel = connection.channel()
 # Consume Callback
 def callback(ch, method, properties, body):
     print("%r:%r" % (method.routing_key, body))
+    print("got here")
     channel.stop_consuming()
     
 
