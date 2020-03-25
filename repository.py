@@ -45,7 +45,6 @@ while 1:
             channel.basic_consume(callback,
                                   queue=mongo_insert['Subject'],
                                   no_ack=True)
-            channel.start_consuming()
         
     except Exception as e:
        print(e)
