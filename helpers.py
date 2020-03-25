@@ -22,7 +22,7 @@ def print_checkpoint(num, des, data):
     output = []
     output.append('[Checkpoint 0' + str(num))
     output.append(str(time.time()) + ']')
-    output.append(des)
+    output.append(des + ':')
     output.append(str(data))
     print (' '.join(output))
     return

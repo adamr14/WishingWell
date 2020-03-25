@@ -34,6 +34,11 @@ channel.queue_declare(queue='Noise')
 channel.queue_declare(queue='Seating')
 channel.queue_declare(queue='Wishes')
 
+# Bind queues to Exchanges
+channel.queue_bind(exchange='Squires',
+                   queue='Food',
+                   routing_key='Food')
+
 
 
 while 1:
