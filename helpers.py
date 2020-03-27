@@ -5,6 +5,10 @@ Created on Tue Mar 24 11:42:14 2020
 
 @author: adamrankin
 """
+
+#
+# imports
+#
 import time
 
 #
@@ -12,12 +16,17 @@ import time
 #
 actions = ['p', 'c']
 
+#dictionary of exchanges and related queues
 exchanges = {'Squires': ['Food', 'Meetings', 'Rooms'],
              'Goodwin': ['Classrooms', 'Auditorium'],
              'Library': ['Noise', 'Seating', 'Wishes']}
 
+# team number
 team_number = '19'
 
+#
+# Method to print checkpopints based on a description
+#
 def print_checkpoint(num, des, data):
     output = []
     output.append('[Checkpoint 0' + str(num))
@@ -32,6 +41,7 @@ def print_checkpoint(num, des, data):
 #
 def parse_input(command):
     try:
+        #parse out command
         action = command.split(':')[0]
         exchange = command.split(':')[1].split('+')[0]
         queue = command.split(' ')[0].split('+')[1]

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+
 #
 # Imports 
 #
@@ -48,6 +50,7 @@ while 1:
                                   queue=mongo_insert['Subject'],
                                   no_ack=True)
             helpers.print_checkpoint(3, 'Output from queue consumption via callback', '')
+            # Catch keyboard interrupt to start next command
             try:
                 channel.start_consuming()
             except KeyboardInterrupt:
